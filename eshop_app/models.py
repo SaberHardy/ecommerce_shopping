@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 CATEGORY_CHOICES = (
     ('S', 'Shirt'),
@@ -19,9 +20,15 @@ class Item(models.Model):
     price = models.FloatField()
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     label = models.CharField(max_length=100, choices=LABEL_CHOICES)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("shopapp:detail", kwargs={
+            'slug': self.slug
+        })
 
 
 # This class to link between the order(shopping cart) and item itself
