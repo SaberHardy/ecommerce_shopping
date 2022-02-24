@@ -1,10 +1,24 @@
 from django.conf import settings
 from django.db import models
 
+CATEGORY_CHOICES = (
+    ('S', 'Shirt'),
+    ('SW', 'Sport wear'),
+    ('O', 'Outwear'),
+)
+
+LABEL_CHOICES = (
+    ('P', 'Primary'),
+    ('S', 'Secondary'),
+    ('D', 'Danger'),
+)
+
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
+    label = models.CharField(max_length=100, choices=LABEL_CHOICES)
 
     def __str__(self):
         return self.title
