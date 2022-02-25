@@ -57,10 +57,16 @@
                                    {% endif %}
 
                                     <label>Quantity:</label><input type="text" value="3"/>
-
+                                    <br>
+                                    <br>
 									<a href="{{ object.get_add_to_cart_url }}" type="button"
                                        class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
+										<i class="fa fa-shopping-cart mr-1"></i>Add to cart
+									</a>
+
+                                    <a href="{{ object.get_remove_from_cart }}" type="button"
+                                       class="btn btn-danger remove_from_cart mt-3 ml-3">
+										<i class="fa fa-shopping-cart mr-1"></i>Remove from cart
 									</a>
 								</span>
 

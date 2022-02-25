@@ -37,6 +37,10 @@ class Item(models.Model):
             'slug': self.slug
         })
 
+    def get_remove_from_cart(self):
+        return reverse("shopapp:remove_from_cart", kwargs={
+            'slug': self.slug
+        })
 
 # This class to link between the order(shopping cart) and item itself
 class OrderItem(models.Model):
