@@ -64,18 +64,10 @@
 										Add to cart
 									</button>
 								</span>
-                                <p><b>Availability:</b> In Stock</p>
-                                <p><b>Condition:</b> New</p>
-                                <p><b>Brand:</b> {{ object.get_category_display }}</p>
-                                <p><b>Description:</b> The text-decoration property specifies the decoration added to
-                                    text, and is a shorthand property for: text-decoration-line (required);
-                                    text-decoration-color text-decoration-color text-decoration-color
-                                    text-decoration-color
-                                    text-decoration-colortext-decoration-color
-                                    -colortext-decoration-color-colortext-decoration-color-colortext-decoration-color-
-                                    colortext-decoration-color-colortext-decoration-color-colortext-decoration-color-
-                                    colortext-decoration-color colortext-decoration-color colortext-decoration-color
-                                    colortext-decoration-colorcolortext-decoration-color colortext- 574
+                                <p><b>Availability: </b> In Stock</p>
+                                <p><b>Condition: </b> New</p>
+                                <p><b>Brand: </b> {{ object.get_category_display }}</p>
+                                <p><b>Description: </b>{{ object.description|slice:850 }}
                                 </p>
                             </div><!--/product-information-->
                         </div>
