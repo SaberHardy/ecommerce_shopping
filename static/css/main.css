@@ -274,7 +274,7 @@ a#scrollUp i {
     background-color: #fff;
 }
 
-.nav.navbar-nav>li:hover>ul.sub-menu {
+.nav.navbar-nav > li:hover > ul.sub-menu {
     display: block;
     -webkit-animation: fadeInUp 400ms;
     animation: fadeInUp 400ms;
@@ -1156,8 +1156,8 @@ h2.title {
 }
 
 .view-product img {
-    border: 1px solid #F7F7F0;
-    height: 380px;
+    border: 1px solid #fe980d;
+    height: 400px;
     width: 100%;
 }
 
@@ -1200,9 +1200,9 @@ h2.title {
 }
 
 .product-information {
-    border: 1px solid #F7F7F0;
+    border: 1px solid #fe980d;
     overflow: hidden;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
     padding-left: 60px;
     padding-top: 60px;
     position: relative;
@@ -1224,7 +1224,7 @@ h2.title {
 .product-information p {
     color: #696763;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: 5px;
+    margin-bottom: 6.5px;
 }
 
 .product-information span {
@@ -1233,14 +1233,19 @@ h2.title {
     margin-top: 18px;
 }
 
+.product-information span .line-throw {
+    text-decoration: line-through;
+    color: #f14646;
+}
+
 .product-information span span {
     color: #FE980F;
     float: left;
     font-family: 'Roboto', sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 700;
     margin-right: 20px;
-    margin-top: 0px;
+    margin-top: 5px;
 }
 
 .product-information span input {
