@@ -171,8 +171,11 @@
                                             {% endif %}
                                             </h2>
 
-                                            <a href="#" class="btn btn-default add-to-cart">
-                                                <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="{% url 'shopapp:add_to_cart' item.slug %}"
+                                               class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

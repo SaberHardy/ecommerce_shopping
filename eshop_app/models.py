@@ -28,17 +28,25 @@ class Item(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("shopapp:detail", kwargs={
+        return reverse("shopapp:product", kwargs={
+            'slug': self.slug
+        })
+
+    def get_add_to_cart_url(self):
+        return reverse("shopapp:add_to_cart", kwargs={
             'slug': self.slug
         })
 
 
 # This class to link between the order(shopping cart) and item itself
 class OrderItem(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.title
+        return f"{self.quantity} of {self.item.title}"
 
 
 # this will represent shopping cart
