@@ -18,6 +18,7 @@ LABEL_CHOICES = (
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
+    discount_price = models.FloatField(blank=True, null=True)
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
     label = models.CharField(max_length=100, choices=LABEL_CHOICES)
     slug = models.SlugField()

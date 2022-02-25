@@ -162,7 +162,12 @@
                                                 <span class="badge badge-danger
                                                     bg-{{ item.get_label_display|lower }}  mx-2"> best seller</span>
                                             </p>
-                                            <h2>${{ item.price }}</h2>
+                                            <h2>${% if item.discount_price %}
+                                                {{ item.discount_price }}
+                                                {% else %}
+                                                {{ item.price }}
+                                                {% endif%}
+                                            </h2>
 
                                             <a href="#" class="btn btn-default add-to-cart">
                                                 <i class="fa fa-shopping-cart"></i>Add to cart</a>

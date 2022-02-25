@@ -49,9 +49,15 @@
                                 <img src="{% static 'images/product-details/new.jpg' %}" class="newarrival" alt=""/>
                                 <h2>{{ object.title|capfirst }}</h2>
                                 <span>
-									<span class="line-throw">{{ object.price }}$</span>
-									<span>{{ object.price }}$</span>
-									<label>Quantity:</label>
+                                   {% if item.discount_price %}
+                                       <span class="line-throw">${{ item.price }}</span>
+                                       <span>${{ item.discount_price }}</span>
+                                   {% else %}
+                                       <span>${{ item.price }}</span>
+                                   {% endif %}
+
+
+                                    <label>Quantity:</label>
 									<input type="text" value="3"/>
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
