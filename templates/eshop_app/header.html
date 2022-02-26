@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart_template_tags %}
 
 <header id="header"><!--header-->
     {% if messages %}
@@ -25,8 +26,16 @@
                             {% if user.is_authenticated %}
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href=""><i class="fa fa-user"></i>Account</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="{% url 'account_logout' %}"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+                                <li>
+                                    <a href="cart.html">
+                                    <span class="badge badge-danger badge-cart-count">
+                                        {{ request.user|cart_item_cart }}
+                                    </span>
+                                        <i class="fa fa-shopping-cart"></i>Cart
+                                    </a>
+                                </li>
+                                <li><a href="{% url 'account_logout' %}"><i class="bi bi-box-arrow-right"></i>Logout</a>
+                                </li>
 
                             {% else %}
                                 <li><a href="{% url 'account_login' %}"><i class="fa fa-lock"></i> Login</a></li>
