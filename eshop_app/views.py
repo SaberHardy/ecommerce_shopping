@@ -1,6 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.views import View
 
 from eshop_app.models import Item, OrderItem, Order
 from django.views.generic import ListView, DetailView
@@ -10,6 +14,21 @@ class HomeView(ListView):
     model = Item
     paginate_by = 2
     template_name = 'eshop_app/home.html'
+
+
+class OrderSummaryView(LoginRequiredMixin, View):
+    # model = Order
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {
+                'object': order
+            }
+            return render(self.request, 'eshop_app/cart.html', context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, 'you dont have an order')
+            return redirect('/')
+    # template_name = 'eshop_app/cart.html'
 
 
 def products(request):
@@ -33,12 +52,13 @@ class ItemDetailView(DetailView):
     template_name = 'eshop_app/product-details.html'
 
 
+@login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
-                    item=item,
-                    user=request.user,
-                    ordered=False)
+        item=item,
+        user=request.user,
+        ordered=False)
     order_qs = Order.objects.filter(user=request.user, ordered=False)
 
     if order_qs.exists():
@@ -52,7 +72,6 @@ def add_to_cart(request, slug):
             messages.info(request, 'This item quantity was updated!')
             return redirect('shopapp:product', slug=slug)
         else:
-            messages.info(request, 'This item was added to your cart')
             order.items.add(order_item)
 
             messages.info(request, 'This item was added to your cart!')
@@ -66,6 +85,7 @@ def add_to_cart(request, slug):
         return redirect('shopapp:product', slug=slug)
 
 
+@login_required
 def remove_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(user=request.user, ordered=False)

@@ -10,12 +10,14 @@
                     <li class="active">Shopping Cart</li>
                 </ol>
             </div>
+            <h2 class="text-center">Order summary</h2>
+
             <div class="table-responsive cart_info">
-                <table class="table table-condensed">
+                <table class="table">
                     <thead>
                     <tr class="cart_menu">
-                        <td class="image">Item</td>
-                        <td class="description"></td>
+                        <td class="image">#</td>
+                        <td class="image">Item title</td>
                         <td class="price">Price</td>
                         <td class="quantity">Quantity</td>
                         <td class="total">Total</td>
@@ -23,85 +25,42 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="cart_product">
-                            <a href=""><img src="{%  static 'images/cart/one.png' %}" alt=""></a>
-                        </td>
-                        <td class="cart_description">
-                            <h4><a href="">Colorblock Scuba</a></h4>
-                            <p>Web ID: 1089772</p>
-                        </td>
-                        <td class="cart_price">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href=""> + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                       autocomplete="off" size="2">
-                                <a class="cart_quantity_down" href=""> - </a>
-                            </div>
-                        </td>
-                        <td class="cart_total">
-                            <p class="cart_total_price">$59</p>
-                        </td>
-                        <td class="cart_delete">
-                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                        </td>
-                    </tr>
+                    {% for oreder_item in object.items.all %}
+                        <tr>
+                            <td class="">
+                                <a href=""><img src="{% static 'images/cart/one.png' %}" alt=""></a>
+                            </td>
+                            <td class="mt-5">
+                                <div class="mt-5">
+                                    <h4><a href="">{{ oreder_item.item.title|upper }}</a></h4>
+                                    <p>Web ID: 1089772</p>
+                                </div>
+                            </td>
+                            <td class="cart_price">
+                                <div class="mt-5">
+                                    <p>${% if oreder_item.item.discount_price %}
+                                            {{ oreder_item.item.discount_price }}
+                                        {% else %}
+                                            {{ oreder_item.item.price }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button mt-5">
+                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="1"
+                                           autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href=""> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price mt-5">$59</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
 
-                    <tr>
-                        <td class="cart_product">
-                            <a href=""><img src="{%  static 'images/cart/two.png' %}" alt=""></a>
-                        </td>
-                        <td class="cart_description">
-                            <h4><a href="">Colorblock Scuba</a></h4>
-                            <p>Web ID: 1089772</p>
-                        </td>
-                        <td class="cart_price">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href=""> + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                       autocomplete="off" size="2">
-                                <a class="cart_quantity_down" href=""> - </a>
-                            </div>
-                        </td>
-                        <td class="cart_total">
-                            <p class="cart_total_price">$59</p>
-                        </td>
-                        <td class="cart_delete">
-                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="cart_product">
-                            <a href=""><img src="{%  static 'images/cart/three.png' %}" alt=""></a>
-                        </td>
-                        <td class="cart_description">
-                            <h4><a href="">Colorblock Scuba</a></h4>
-                            <p>Web ID: 1089772</p>
-                        </td>
-                        <td class="cart_price">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <a class="cart_quantity_up" href=""> + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                       autocomplete="off" size="2">
-                                <a class="cart_quantity_down" href=""> - </a>
-                            </div>
-                        </td>
-                        <td class="cart_total">
-                            <p class="cart_total_price">$59</p>
-                        </td>
-                        <td class="cart_delete">
-                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>
