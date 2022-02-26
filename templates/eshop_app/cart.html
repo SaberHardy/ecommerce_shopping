@@ -13,20 +13,23 @@
             <h2 class="text-center">Order summary</h2>
 
             <div class="table-responsive cart_info">
-                <table class="table">
+                <table class="table table-striped" >
                     <thead>
                     <tr class="cart_menu">
-                        <td class="image">#</td>
+                        <td class="id">Item id</td>
+                        <td class="id">Item image</td>
                         <td class="image">Item title</td>
                         <td class="price">Price</td>
                         <td class="quantity">Quantity</td>
                         <td class="total">Total</td>
-                        <td></td>
                     </tr>
                     </thead>
                     <tbody>
                     {% for order_item in object.items.all %}
                         <tr>
+                        <td class="text-center">
+                               {{ order_item.item.id }}
+                            </td>
                             <td class="">
                                 <a href=""><img src="{% static 'images/cart/one.png' %}" alt=""></a>
                             </td>
@@ -48,11 +51,10 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button mt-5">
-                                    <a class="cart_quantity_up" href=""> + </a>
+
                                     <input class="cart_quantity_input" type="text" name="quantity"
                                            value="{{ order_item.quantity }}"
-                                           autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
+                                           autocomplete="off" size="2" readonly>
                                 </div>
                             </td>
                             <td class="cart_total">
@@ -70,6 +72,15 @@
                             </td>
                         </tr>
                     {% endfor %}
+                    <tr>
+                        <td colspan="5">Order Total</td>
+                        <td ><b> ${{ object.get_total  }}</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <a class="btn btn-warning float-right" href="/checkout/">Checkout</a>
+                        </td>
+                    </tr>
 
 
                     </tbody>

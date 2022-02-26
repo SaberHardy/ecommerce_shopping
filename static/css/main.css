@@ -1591,6 +1591,10 @@ h2.title {
     height: 51px;
 }
 
+.table {
+    border-color: #FFFFFF;
+}
+
 #cart_items .cart_info .table.table-condensed tr {
     border-bottom: 1px solid #F7F7F0
 }
