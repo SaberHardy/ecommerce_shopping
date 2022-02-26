@@ -25,37 +25,48 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for oreder_item in object.items.all %}
+                    {% for order_item in object.items.all %}
                         <tr>
                             <td class="">
                                 <a href=""><img src="{% static 'images/cart/one.png' %}" alt=""></a>
                             </td>
                             <td class="mt-5">
                                 <div class="mt-5">
-                                    <h4><a href="">{{ oreder_item.item.title|upper }}</a></h4>
+                                    <h4><a href="">{{ order_item.item.title|upper }}</a></h4>
                                     <p>Web ID: 1089772</p>
                                 </div>
                             </td>
                             <td class="cart_price">
                                 <div class="mt-5">
-                                    <p>${% if oreder_item.item.discount_price %}
-                                            {{ oreder_item.item.discount_price }}
-                                        {% else %}
-                                            {{ oreder_item.item.price }}
-                                        {% endif %}
+                                    <p>${% if order_item.item.discount_price %}
+                                        {{ order_item.item.discount_price }}
+                                    {% else %}
+                                        {{ order_item.item.price }}
+                                    {% endif %}
                                     </p>
                                 </div>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button mt-5">
                                     <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="1"
+                                    <input class="cart_quantity_input" type="text" name="quantity"
+                                           value="{{ order_item.quantity }}"
                                            autocomplete="off" size="2">
                                     <a class="cart_quantity_down" href=""> - </a>
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price mt-5">$59</p>
+                                <p class="cart_total_price mt-5">$
+                                    {% if order_item.item.discount_price %}
+                                        {{ order_item.get_total_discount_item_price }}
+                                        <span class="badge badge-danger
+                                                    bg-success">
+                                            saving {{ order_item.get_amount_saved|floatformat:2 }}
+                                        </span>
+                                    {% else %}
+                                        {{ order_item.get_total_item_price }}
+                                    {% endif %}
+                                </p>
                             </td>
                         </tr>
                     {% endfor %}

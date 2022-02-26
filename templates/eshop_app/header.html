@@ -27,7 +27,7 @@
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href=""><i class="fa fa-user"></i>Account</a></li>
                                 <li>
-                                    <a href="cart.html">
+                                    <a href="{% url 'shopapp:order_summary' %}">
                                     <span class="badge badge-danger badge-cart-count">
                                         {{ request.user|cart_item_cart }}
                                     </span>
