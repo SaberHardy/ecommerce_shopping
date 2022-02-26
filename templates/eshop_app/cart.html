@@ -51,7 +51,8 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button mt-5">
-                                    <a class="cart_quantity_up mr-2" href="{% url 'shopapp:add_to_cart' order_item.item.slug %}">
+                                    <a class="cart_quantity_up mr-2"
+                                       href="{% url 'shopapp:add_to_cart' order_item.item.slug %}">
                                         + </a>
                                     <input class="cart_quantity_input" type="text" name="quantity"
                                            value="{{ order_item.quantity }}"
@@ -70,26 +71,24 @@
                                             saving {{ order_item.get_amount_saved|floatformat:2 }}
                                         </span>
                                     {% else %}
-                                        {{ order_item.get_total_item_price }}
+                                        {{ order_item.get_total_item_price|floatformat:2 }}
                                     {% endif %}
+                                    <a href="{% url 'shopapp:remove_from_cart' order_item.item.slug %}">
+                                        <i class="bi bi-trash3-fill float-right mr-4 text-danger"></i>
+                                    </a>
                                 </p>
                             </td>
                         </tr>
+
                     {% empty %}
                         <tr>
-                            <td colspan="5">Your cart is empty</td>
+                            <td colspan="6">Your cart is empty</td>
                         </tr>
-                        <tr>
-                            <td colspan="5">
-                                <a class="btn btn-warning float-right" href="/checkout/">Checkout</a>
-                            </td>
-                        </tr>
-
                     {% endfor %}
                     {% if object.get_total %}
                         <tr>
                             <td colspan="5">Order Total</td>
-                            <td><b> ${{ object.get_total }}</b></td>
+                            <td><b> ${{ object.get_total|floatformat:2 }}</b></td>
                         </tr>
                         <tr>
                             <td colspan="6">

@@ -98,7 +98,7 @@ def remove_from_cart(request, slug):
             order.items.remove(order_item)
 
             messages.info(request, 'This item was removed from your cart')
-            return redirect('shopapp:product', slug=slug)
+            return redirect('shopapp:order_summary')
         else:
             messages.info(request, 'This item was not in your cart')
             return redirect('shopapp:product', slug=slug)
@@ -118,8 +118,11 @@ def remove_single_item_from_cart(request, slug):
         # Check if there is any order for user
         if order.items.filter(item__slug=item.slug).exists():
             order_item = OrderItem.objects.filter(item=item, user=request.user, ordered=False)[0]
-            order_item.quantity -= 1
-            order_item.save()
+            if order_item > 1:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order.items.remove(order_item)
 
             messages.info(request, 'This item quantity was updated')
             return redirect('shopapp:order_summary')
