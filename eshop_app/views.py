@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView
 
 class HomeView(ListView):
     model = Item
+    paginate_by = 2
     template_name = 'eshop_app/home.html'
 
 
