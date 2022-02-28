@@ -15,6 +15,15 @@ class HomeView(ListView):
     paginate_by = 2
     template_name = 'eshop_app/home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        last_3_items = Item.objects.order_by('-title')[:3]
+
+        context.update({
+            'last_3_items': last_3_items,
+        })
+        return context
+
 
 class OrderSummaryView(LoginRequiredMixin, View):
     # model = Order
@@ -33,8 +42,11 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 def products(request):
     items = Item.objects.all()
+    last_3_items = Item.objects.all()
+    print(f"last item is: {last_3_items}")
     context = {
-        'items': items
+        'items': items,
+        'last_3_items': last_3_items,
     }
     return render(request, 'eshop_app/home.html', context)
 
@@ -50,6 +62,14 @@ def error404(request):
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'eshop_app/product-details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        recommended_items = Item.objects.order_by('-title')[:3]
+        context.update({
+            'recommended_items': recommended_items
+        })
+        return context
 
 
 @login_required
@@ -133,3 +153,15 @@ def remove_single_item_from_cart(request, slug):
     else:
         messages.info(request, 'You do not have an active order')
         return redirect('shopapp:product', slug=slug)
+
+
+def contact(request):
+    return render(request, 'eshop_app/contact-us.html')
+
+
+def blog_view(request):
+    return render(request, 'eshop_app/blog.html')
+
+
+def detail_blog_view(request):
+    return render(request, 'eshop_app/blog-single.html')

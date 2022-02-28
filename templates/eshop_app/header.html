@@ -24,7 +24,7 @@
                     <div class="shop-menu clearfix pull-right">
                         <ul class="nav navbar-nav">
                             {% if user.is_authenticated %}
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                <li><a href="{% url 'shopapp:checkout' %}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href=""><i class="fa fa-user"></i>Account</a></li>
                                 <li>
                                     <a href="{% url 'shopapp:order_summary' %}">
@@ -66,19 +66,19 @@
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="item_list.html">Products</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="{% url 'shopapp:home' %}">Products</a></li>
+                                    <li><a href="{% url 'shopapp:checkout' %}">Checkout</a></li>
+                                    <li><a href="{% url 'shopapp:order_summary' %}">Cart</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="#" class="active">Blog<i class="fa fa-angle-down"></i></a>
+                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Blog List</a></li>
-                                    <li><a href="blog-single.html" class="active">Blog Single</a></li>
+                                    <li><a href="{% url 'shopapp:blog' %}">Blog List</a></li>
+                                    <li><a href="{% url 'shopapp:detail_blog_view' %}">Blog Single</a></li>
                                 </ul>
                             </li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{% url 'shopapp:err404' %}">404</a></li>
+                            <li><a href="{% url 'shopapp:contact' %}">Contact</a></li>
                         </ul>
                     </div>
                 </div>

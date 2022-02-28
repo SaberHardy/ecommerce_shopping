@@ -845,6 +845,11 @@ h2.title {
     position: relative;
 }
 
+.single-products p {
+    position: relative;
+    color: #2a6496;
+}
+
 .new,
 .sale {
     position: absolute;
@@ -870,7 +875,7 @@ h2.title {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: #696763;
+    color: #428bca;
 }
 
 .productinfo img {
@@ -879,6 +884,7 @@ h2.title {
 
 .productinfo {
     position: relative;
+    color: #428bca;
 }
 
 .product-overlay {
