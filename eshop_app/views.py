@@ -138,7 +138,7 @@ def remove_single_item_from_cart(request, slug):
         # Check if there is any order for user
         if order.items.filter(item__slug=item.slug).exists():
             order_item = OrderItem.objects.filter(item=item, user=request.user, ordered=False)[0]
-            if order_item > 1:
+            if order_item.quantity > 1:
                 order_item.quantity -= 1
                 order_item.save()
             else:
