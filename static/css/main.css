@@ -1886,11 +1886,20 @@ textarea {
 }
 
 .shopper-info p,
-.bill-to p,
 .order-message p {
     color: #696763;
     font-size: 20px;
     font-weight: 300
+}
+.bill-to p {
+    color: #696763;
+    font-size: 20px;
+    font-weight: 300;
+    margin-left: 32px;
+}
+
+.form-check {
+    margin-left: 6px;
 }
 
 .shopper-info .btn-primary {
@@ -1943,7 +1952,7 @@ textarea {
 }
 
 .review-payment h2 {
-    color: #696763;
+    color: #000000;
     font-size: 20px;
     font-weight: 300;
     margin-top: 45px;

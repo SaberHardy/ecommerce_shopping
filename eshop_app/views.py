@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views import View
 
+from eshop_app.forms import CheckOutForm
 from eshop_app.models import Item, OrderItem, Order
 from django.views.generic import ListView, DetailView
 
@@ -51,8 +52,20 @@ def products(request):
     return render(request, 'eshop_app/home.html', context)
 
 
-def checkout(request):
-    return render(request, 'eshop_app/checkout.html', {})
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        form = CheckOutForm()
+        context = {
+            'form': form,
+        }
+        return render(self.request, 'eshop_app/checkout.html', context)
+
+    def post(self, *args, **kwargs):
+        form = CheckOutForm(self.request.POST or None)
+        if form.is_valid():
+            # form.save()
+            print('the form is saved')
+            redirect('shopapp:checkout')
 
 
 def error404(request):

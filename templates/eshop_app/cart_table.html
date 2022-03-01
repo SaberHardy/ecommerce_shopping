@@ -22,8 +22,8 @@
                         <td class="total">Total</td>
                     </tr>
                     </thead>
-                    <tbody>
-                    {% for order_item in object.items.all %}
+                    <tbody>{% for order_item in object.items.all %}
+
                         <tr>
                             <td class="text-center">
                                 {{ order_item.item.id }}
