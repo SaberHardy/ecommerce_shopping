@@ -26,7 +26,7 @@ class CheckOutForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': "Zip code"
     }))
-    same_billing_address = forms.BooleanField(widget=forms.CheckboxInput(attrs={
+    same_shipping_address = forms.BooleanField(widget=forms.CheckboxInput(attrs={
                             'class': 'form-check-input',
                             'type': 'checkbox',
                             'value': '',

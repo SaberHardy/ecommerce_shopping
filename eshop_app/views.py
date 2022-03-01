@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views import View
 
 from eshop_app.forms import CheckOutForm
-from eshop_app.models import Item, OrderItem, Order
+from eshop_app.models import Item, OrderItem, Order, BillingAddress
 from django.views.generic import ListView, DetailView
 
 
@@ -62,10 +62,35 @@ class CheckoutView(View):
 
     def post(self, *args, **kwargs):
         form = CheckOutForm(self.request.POST or None)
-        if form.is_valid():
-            # form.save()
-            print('the form is saved')
-            redirect('shopapp:checkout')
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            if form.is_valid():
+                address = form.cleaned_data.get('address')
+                apartment_address = form.cleaned_data.get('apartment_address')
+                country = form.cleaned_data.get('country')
+                zip_code = form.cleaned_data.get('zip_code')
+                # Todo: add payment options
+                # same_shipping_address = form.cleaned_data.get('same_billing_address')
+                # save_info = form.cleaned_data.get('save_info')
+                payment_option = form.cleaned_data.get('payment_option')
+
+                billing_address = BillingAddress(
+                    user=self.request.user,
+                    address=address,
+                    apartment_address=apartment_address,
+                    country=country,
+                    zip_code=zip_code,
+                )
+                billing_address.save()
+                order.billing_address = billing_address
+                order.save()
+                return redirect('shopapp:checkout')
+
+            messages.info(self.request, 'Failed to checkout')
+            return redirect('shopapp:checkout')
+        except ObjectDoesNotExist:
+            messages.error(self.request, 'you dont have an order')
+            return redirect('shopapp:order_summary')
 
 
 def error404(request):
